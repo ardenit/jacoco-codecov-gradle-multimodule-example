@@ -1,0 +1,2 @@
+[![Build Status](https://travis-ci.org/mirage-a/travistest.svg?branch=master)](https://travis-ci.org/mirage-a/travistest)
+[![Code Coverage](https://codecov.io/github/mirage-a/travistest/coverage.svg)](https://codecov.io/gh/mirage-a/travistest)
