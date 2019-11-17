@@ -1,4 +1,5 @@
 language: java
+sudo: true
 
 before_install:
   - pip install --user codecov
