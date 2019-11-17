@@ -1,8 +1,11 @@
 language: java
-sudo: true
-
+jdk:
+  - openjdk11
 before_install:
-  - pip install --user codecov
-
+  - chmod +x gradlew
+  - chmod +x gradle/wrapper/gradle-wrapper.jar
+script:
+  - ./gradlew test build
+  - ./gradlew codeCoverageReport
 after_success:
-  - codecov
+  - bash <(curl -s https://codecov.io/bash)
