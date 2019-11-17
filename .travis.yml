@@ -1,16 +1,8 @@
 language: java
-install: true
-
-os: linux
-dist: trusty
-jdk: oraclejdk8
+sudo: false # faster builds
 
 before_install:
-  - chmod +x ./gradlew
   - pip install --user codecov
-
-script:
-  - ./gradlew build
 
 after_success:
   - codecov
