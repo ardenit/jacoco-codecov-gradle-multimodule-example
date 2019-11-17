@@ -7,4 +7,9 @@ internal class TestyKtTest {
     fun testSum() {
         assertEquals(5, sum(2, 3))
     }
+
+    @Test
+    fun testNothing() {
+        assertTrue(true)
+    }
 }
