@@ -38,8 +38,9 @@ tasks {
         }
 
         reports {
-            //sourceDirectories =  files(sourceSets["main"].allSource.srcDirs)
-            //classDirectories =  files(sourceSets["main"].output)
+            setSourceDirectories(files(sourceSets["main"].allSource.srcDirs))
+            setClassDirectories(files(sourceSets["main"].output))
+
             xml.isEnabled = true
             xml.destination = File("$buildDir/reports/jacoco/report.xml")
             html.isEnabled = false
