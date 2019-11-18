@@ -73,7 +73,7 @@ jacoco {
     reportsDir = file("$buildDir/customJacocoReportDir")
 }
 
-def allTestCoverageFile = "$buildDir/jacoco/all-test.exec"
+def allTestCoverageFile = "$buildDir/jacoco/test.exec"
 
 task jacocoMergeTest(type: JacocoMerge) {
     destinationFile = file(allTestCoverageFile)
