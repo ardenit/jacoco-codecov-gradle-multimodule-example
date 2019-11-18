@@ -7,7 +7,6 @@ before_install:
 script:
   - ./gradlew clean
   - ./gradlew check
-  - ./gradlew jacocoMergeTest
-  - ./gradlew jacocoFullReport
+  - ./gradlew codeCoverageReport
 after_success:
   - bash <(curl -s https://codecov.io/bash)
