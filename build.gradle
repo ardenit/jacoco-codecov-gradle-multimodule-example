@@ -15,7 +15,6 @@ buildscript {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
         classpath "org.junit.platform:junit-platform-gradle-plugin:1.0.0-M4"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
-        classpath 'com.palantir:jacoco-coverage:0.4.0'
     }
 }
 
@@ -32,7 +31,6 @@ allprojects {
     apply plugin: "org.jetbrains.kotlin.jvm"
     apply plugin: 'maven'
     apply plugin: 'jacoco'
-    apply plugin: 'com.palantir.jacoco-full-report'
     version = '1.0'
     ext {
         appName = "SW - Client"
@@ -73,34 +71,25 @@ jacoco {
     reportsDir = file("$buildDir/customJacocoReportDir")
 }
 
-def allTestCoverageFile = "$buildDir/jacoco/test.exec"
-
-task jacocoMergeTest(type: JacocoMerge) {
-    destinationFile = file(allTestCoverageFile)
-    executionData = project.fileTree(dir: '.', include: '**/build/jacoco/test.exec')
-}
-
-jacocoTestReport {
-    reports {
-        xml.enabled false
-        csv.enabled false
-        html.destination file("${buildDir}/jacocoHtml")
-    }
-}
 
 task codeCoverageReport(type: JacocoReport) {
     executionData fileTree(project.rootDir.absolutePath).include("**/build/jacoco/*.exec")
 
+    subprojects.each {
+        sourceSets((SourceSet)it.sourceSets["main"])
+    }
+
     reports {
-        setSourceDirectories(files(sourceSets["main"].allSource.srcDirs))
-        setClassDirectories(files(sourceSets["main"].output))
         xml.enabled true
-        //xml.destination("${buildDir}/reports/jacoco/report.xml")
         html.enabled true
         csv.enabled true
     }
-    dependsOn test
 }
+
+codeCoverageReport.dependsOn {
+    subprojects*.test
+}
+
 repositories {
     mavenCentral()
 }
