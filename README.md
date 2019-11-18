@@ -3,3 +3,4 @@
 
 
 A working example of multimodular Gradle project using JaCoCo, Travis CI and Codecov.
+
